@@ -3,4 +3,6 @@ project(lab_15 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(lab_15 main.c)
+add_executable(lab_15 main.c
+        data_structures/matrix/matrix.c
+        data_structures/matrix/matrix.h)
