@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-int main(void) {
+#include "data_structures/matrix/matrix.h"
+
+int main() {
     printf("Hello, World!\n");
     return 0;
 }

@@ -32,4 +32,16 @@ void free_mem_matrix(matrix *m);
 void free_mem_matrices(matrix *ms, int n_matrices);
 
 
+void input_matrix(matrix  *m);
+
+
+void input_matrices(matrix *ms, int n_matrices);
+
+
+void output_matrix(matrix  m);
+
+
+void output_matrices(matrix *ms, int n_matrices);
+
+
 #endif //CODE_MATRIX_H
