@@ -16,12 +16,13 @@ int get_sum(int* a, int n) {
 
 
 int main() {
-    matrix a = get_mem_matrix(3, 3);
+    matrix a = get_mem_matrix(4, 3);
 
     input_matrix(&a);
 
-    printf("yes");
+    transpose_square_matrix(&a);
 
+    output_matrix(&a);
 
     return 0;
 }

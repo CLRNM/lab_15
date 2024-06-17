@@ -203,24 +203,50 @@ bool are_two_matrices_equal(matrix* m1, matrix* m2) {
 
 
 bool is_E_matrix(matrix *m) {
-    for (size_t i = 0; i < m->n_rows; i++) {
-        for (size_t j = 0; j < m->n_cols; j++) {
-            // Если элемент не на главной диагонали и не равен 0, или если элемент на главной диагонали и не равен 1, возвращаем false
-            if ((j != i && m->values[i][j] != 0) || (j == i && m->values[i][j] != 1)) {
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = 0; j < m->n_cols; j++)
+            if ((j != i && m->values[i][j] != 0) || (j == i && m->values[i][j] != 1))
                 return false;
-            }
-        }
-    }
-
-    // Если все строки матрицы удовлетворяют условию единичной матрицы, возвращаем true
     return true;
 }
 
 
 bool is_symmetric_matrix(matrix *m) {
-    for (size_t i = 1; i < m->n_rows; i++)
-        for (size_t j = i + 1; j < m->n_cols; j++)
-            if (m->values[i][j] != m->values[j][i])
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = 0; j < m->n_cols; j++)
+            if (m->values[i][j] != m->values[j][i] && i != j)
                 return false;
     return true;
+}
+
+
+void transpose_square_matrix(matrix* m) {
+    if (m->n_rows != m->n_cols) {
+        fprintf(stderr, "Is not square matrix");
+        exit(1);
+    }
+
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = i + 1; j < m->n_cols; j++)
+            if (i != j)
+                swap(&m->values[i][j], &m->values[j][i]);
+}
+
+
+void transpose_matrix(matrix* m) {
+    int** new_value = (int**) malloc(sizeof(int*) * m->n_cols);
+
+    for (size_t i = 0; i < m->n_cols; i++) {
+        new_value[i] = (int*) malloc(sizeof(int) * m->n_rows);
+
+        for (size_t j = 0; j < m->n_rows; j++)
+            new_value[i][j] = m->values[j][i];
+    }
+
+    for (size_t i = 0; i < m->n_rows; i++)
+        free(m->values[i]);
+    free(m->values);
+
+    m->values = new_value;
+    swap(&m->n_rows, &m->n_cols);
 }

@@ -70,4 +70,10 @@ bool is_E_matrix(matrix *m);
 bool is_symmetric_matrix(matrix *m);
 
 
+void transpose_square_matrix(matrix* m);
+
+
+void transpose_matrix(matrix* m);
+
+
 #endif //CODE_MATRIX_H
