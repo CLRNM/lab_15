@@ -30,9 +30,8 @@ matrix get_mem_matrix(int n_rows, int n_cols) {
 matrix* get_mem_array_of_matrices(int n_matrices, int n_rows, int n_cols) {
     matrix *ms = (matrix*) malloc(sizeof(matrix) * n_matrices);
 
-    for (size_t i = 0; i < n_matrices; i++) {
+    for (size_t i = 0; i < n_matrices; i++)
         ms[i] = get_mem_matrix(n_rows, n_cols);
-    }
 
     return ms;
 }
@@ -64,7 +63,7 @@ void input_matrix(matrix  *m) {
     for (int i = 0; i < m->n_rows; i++) {
         printf("input %d row:", i + 1);
         for (int j = 0; j < m->n_cols; j++)
-            scanf("%d", &m->values[i][j]); //
+            scanf("%d", &m->values[i][j]);
     }
 }
 
