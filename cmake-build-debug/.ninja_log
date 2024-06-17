@@ -24,3 +24,6 @@
 4	58	7403608246389269	CMakeFiles/lab_15.dir/main.c.obj	68e0e8a22af4c9eb
 7	85	7403608246419286	CMakeFiles/lab_15.dir/data_structures/matrix/matrix.c.obj	e94555c864b43b9a
 85	147	7403608247196141	lab_15.exe	49af64bde7dce00c
+4	156	7403621707992383	CMakeFiles/lab_15.dir/main.c.obj	68e0e8a22af4c9eb
+21	192	7403621708162382	CMakeFiles/lab_15.dir/data_structures/matrix/matrix.c.obj	e94555c864b43b9a
+192	348	7403621709874100	lab_15.exe	49af64bde7dce00c

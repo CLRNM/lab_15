@@ -39,8 +39,8 @@ matrix* get_mem_array_of_matrices(int n_matrices, int n_rows, int n_cols) {
 
 
 void free_mem_matrix(matrix *m) {
-    for (size_t i = 0; i < m->n_rows; i++)
-        free(m + i);
+    for (int i = 0; i < m->n_rows; i++)
+        free(m->values[i]);
 
     free(m->values);
     m->values = NULL;
@@ -200,8 +200,8 @@ bool is_E_matrix(matrix *m) {
 
 bool is_symmetric_matrix(matrix *m) {
     for (size_t i = 0; i < m->n_rows; i++)
-        for (size_t j = 0; j < m->n_cols; j++)
-            if (m->values[i][j] != m->values[j][i] && i != j)
+        for (size_t j = i + 1; j < m->n_cols; j++)
+            if (m->values[i][j] != m->values[j][i])
                 return false;
     return true;
 }
@@ -245,7 +245,7 @@ position get_min_value_pos(matrix m) {
 
     for (int i = 0; i < m.n_rows; i++)
         for (int j = 0; j < m.n_cols; j++)
-            if (min_value < m.values[i][j]) {
+            if (m.values[i][j] < min_value) {
                 min_value = m.values[i][j];
                 pos.row_index = i;
                 pos.col_index = j;
@@ -256,13 +256,13 @@ position get_min_value_pos(matrix m) {
 
 
 position get_max_value_pos(matrix m) {
-    int min_value = m.values[0][0];
+    int max_value = m.values[0][0];
     position pos = {0, 0};
 
     for (int i = 0; i < m.n_rows; i++)
         for (int j = 0; j < m.n_cols; j++)
-            if (min_value > m.values[i][j]) {
-                min_value = m.values[i][j];
+            if (m.values[i][j] > max_value) {
+                max_value = m.values[i][j];
                 pos.row_index = i;
                 pos.col_index = j;
             }
