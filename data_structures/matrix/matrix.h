@@ -44,4 +44,16 @@ void output_matrix(matrix  m);
 void output_matrices(matrix *ms, int n_matrices);
 
 
+void swap_rows(matrix* m, int i1, int i2);
+
+
+void swap_columns(matrix* m, int j1, int j2);
+
+
+void insertion_sort_rows_matrix_by_row_criteria(matrix* m, int (*criteria) (int*, int));
+
+
+void selection_sort_cols_matrix_by_col_criteria(matrix* m, int (*criteria) (int*, int));
+
+
 #endif //CODE_MATRIX_H
