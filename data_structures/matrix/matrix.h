@@ -6,6 +6,8 @@
 #ifndef CODE_MATRIX_H
 #define CODE_MATRIX_H
 
+#include <stdbool.h>
+
 
 typedef struct matrix {
     int **values;
@@ -38,7 +40,7 @@ void input_matrix(matrix  *m);
 void input_matrices(matrix *ms, int n_matrices);
 
 
-void output_matrix(matrix  m);
+void output_matrix(matrix* m);
 
 
 void output_matrices(matrix *ms, int n_matrices);
@@ -54,6 +56,18 @@ void insertion_sort_rows_matrix_by_row_criteria(matrix* m, int (*criteria) (int*
 
 
 void selection_sort_cols_matrix_by_col_criteria(matrix* m, int (*criteria) (int*, int));
+
+
+bool is_square_matrix(matrix* m);
+
+
+bool are_two_matrices_equal(matrix* m1, matrix* m2);
+
+
+bool is_E_matrix(matrix *m);
+
+
+bool is_symmetric_matrix(matrix *m);
 
 
 #endif //CODE_MATRIX_H

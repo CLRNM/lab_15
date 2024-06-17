@@ -16,13 +16,11 @@ int get_sum(int* a, int n) {
 
 
 int main() {
-    matrix a = get_mem_matrix(5, 3);
+    matrix a = get_mem_matrix(3, 3);
 
     input_matrix(&a);
 
-    selection_sort_cols_matrix_by_col_criteria(&a, get_sum);
-
-    output_matrix(a);
+    printf("yes");
 
 
     return 0;

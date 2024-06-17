@@ -23,6 +23,12 @@ static void copy_array(int a[], int b[], int n) {
 }
 
 
+static void print_array(int a[], size_t n) {
+    for (size_t i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
 
 matrix get_mem_matrix(int n_rows, int n_cols) {
     int** values = (int**) malloc(sizeof(int*) * n_rows);
@@ -85,10 +91,10 @@ void input_matrices(matrix *ms, int n_matrices) {
 }
 
 
-void output_matrix(matrix  m) {
-    for (size_t i = 0; i < m.n_rows; i++) {
-        for (size_t j = 0; j < m.n_cols; j++)
-            printf("%d ", m.values[i][j]);
+void output_matrix(matrix* m) {
+    for (size_t i = 0; i < m->n_rows; i++) {
+        for (size_t j = 0; j < m->n_cols; j++)
+            printf("%d ", m->values[i][j]);
         printf("\n");
     }
     printf("\n");
@@ -97,7 +103,7 @@ void output_matrix(matrix  m) {
 
 void output_matrices(matrix *ms, int n_matrices) {
     for (size_t i = 0; i < n_matrices; i++)
-        output_matrix(ms[i]);
+        output_matrix(ms + i);
 }
 
 
@@ -140,15 +146,6 @@ void insertion_sort_rows_matrix_by_row_criteria(matrix* m, int (*criteria) (int*
 }
 
 
-void print(int a[], const size_t n) {
-    printf("array: ");
-    for (size_t i = 0; i < n; i++)
-        printf("%d ", a[i]);
-    printf("\n");
-}
-
-
-
 void selection_sort_cols_matrix_by_col_criteria(matrix* m, int (*criteria) (int*, int)) {
     int res_criteria[m->n_cols];
 
@@ -171,4 +168,59 @@ void selection_sort_cols_matrix_by_col_criteria(matrix* m, int (*criteria) (int*
         swap(&res_criteria[value_min_idx], &res_criteria[i]);
         swap_columns(m, value_min_idx, i);
     }
+}
+
+bool is_square_matrix(matrix* m) {
+    return m->n_rows == m->n_cols;
+}
+
+
+bool are_two_matrices_equal(matrix* m1, matrix* m2) {
+    for (size_t i = 0; i < m1->n_rows; i++)
+        if (memcmp(m1->values[i], m2->values[i], m1->n_cols) != 0)
+            return false;
+    return true;
+}
+
+
+//bool is_E_matrix(matrix *m) {
+//    int e[m->n_cols + 1];
+//    for (size_t i = 1; i <= m->n_cols; i++)
+//        e[i] = 0;
+//    e[0] = 1;
+//
+//
+//    for (size_t i = 0; i < m->n_rows; i++) {
+//        if (memcmp(m->values[i], e, m->n_cols) != 0)
+//            return false;
+//
+//        e[i + 1] = 1;
+//        e[i] = 0;
+//    }
+//
+//    return true;
+//}
+
+
+bool is_E_matrix(matrix *m) {
+    for (size_t i = 0; i < m->n_rows; i++) {
+        for (size_t j = 0; j < m->n_cols; j++) {
+            // Если элемент не на главной диагонали и не равен 0, или если элемент на главной диагонали и не равен 1, возвращаем false
+            if ((j != i && m->values[i][j] != 0) || (j == i && m->values[i][j] != 1)) {
+                return false;
+            }
+        }
+    }
+
+    // Если все строки матрицы удовлетворяют условию единичной матрицы, возвращаем true
+    return true;
+}
+
+
+bool is_symmetric_matrix(matrix *m) {
+    for (size_t i = 1; i < m->n_rows; i++)
+        for (size_t j = i + 1; j < m->n_cols; j++)
+            if (m->values[i][j] != m->values[j][i])
+                return false;
+    return true;
 }
