@@ -76,4 +76,15 @@ void transpose_square_matrix(matrix* m);
 void transpose_matrix(matrix* m);
 
 
+position get_min_value_pos(matrix m);
+
+
+position get_max_value_pos(matrix m);
+
+
+matrix create_matrix_from_array(const int a[], int n_rows, int n_cols);
+
+
+matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols);
+
 #endif //CODE_MATRIX_H

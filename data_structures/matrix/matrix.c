@@ -17,19 +17,6 @@ static void swap(int* a, int* b) {
 }
 
 
-static void copy_array(int a[], int b[], int n) {
-    for (int i = 0; i < n; i++)
-        b[i] = a[i];
-}
-
-
-static void print_array(int a[], size_t n) {
-    for (size_t i = 0; i < n; i++)
-        printf("%d ", a[i]);
-    printf("\n");
-}
-
-
 matrix get_mem_matrix(int n_rows, int n_cols) {
     int** values = (int**) malloc(sizeof(int*) * n_rows);
 
@@ -249,4 +236,61 @@ void transpose_matrix(matrix* m) {
 
     m->values = new_value;
     swap(&m->n_rows, &m->n_cols);
+}
+
+
+position get_min_value_pos(matrix m) {
+    int min_value = m.values[0][0];
+    position pos = {0, 0};
+
+    for (int i = 0; i < m.n_rows; i++)
+        for (int j = 0; j < m.n_cols; j++)
+            if (min_value < m.values[i][j]) {
+                min_value = m.values[i][j];
+                pos.row_index = i;
+                pos.col_index = j;
+            }
+
+    return pos;
+}
+
+
+position get_max_value_pos(matrix m) {
+    int min_value = m.values[0][0];
+    position pos = {0, 0};
+
+    for (int i = 0; i < m.n_rows; i++)
+        for (int j = 0; j < m.n_cols; j++)
+            if (min_value > m.values[i][j]) {
+                min_value = m.values[i][j];
+                pos.row_index = i;
+                pos.col_index = j;
+            }
+
+    return pos;
+}
+
+
+matrix create_matrix_from_array(const int a[], int n_rows, int n_cols) {
+    matrix m = get_mem_matrix(n_rows, n_cols);
+
+    int k = 0;
+    for (int i = 0; i < n_rows; i++)
+        for (int j = 0; j < n_cols; j++)
+            m.values[i][j] = a[k++];
+
+    return m;
+}
+
+
+matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols) {
+    matrix* ms = get_mem_array_of_matrices(n_matrices, n_rows, n_cols);
+
+    int l = 0;
+    for (size_t k = 0; k < n_matrices; k++)
+        for (size_t i = 0; i < n_rows; i++)
+            for (size_t j = 0; j < n_cols; j++)
+                ms[k].values[i][j] = values[l++];
+
+    return ms;
 }
